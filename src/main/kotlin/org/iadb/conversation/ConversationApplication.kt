@@ -9,7 +9,7 @@ import org.springframework.web.client.RestTemplate
 open class ConversationApplication {
 
     @Bean
-    fun restTemplate(): RestTemplate = RestTemplate()
+    open fun restTemplate(): RestTemplate = RestTemplate()
 }
 
 fun main(args: Array<String>) {

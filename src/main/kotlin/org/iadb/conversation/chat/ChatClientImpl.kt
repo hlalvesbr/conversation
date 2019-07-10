@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.client.RestTemplate
 
 @Component
-class ChatClientImpl(@Value("\${chat.url}") val chatURL: String,
+open class ChatClientImpl(@Value("\${chat.url}") val chatURL: String,
                      @Value("\${assistant.token}") val assistantToken: String,
                      @Value("\${organization.token}") val organizationToken: String,
                      @Autowired val restTemplate: RestTemplate) : ChatClient {

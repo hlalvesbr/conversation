@@ -9,9 +9,10 @@ import org.springframework.web.servlet.ModelAndView
 import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
-class MessageController(@Autowired val chatClient: ChatClient) {
+open class MessageController(@Autowired val chatClient: ChatClient) {
+    
 	@RequestMapping("/messages", method = [RequestMethod.GET])
-    fun show(@RequestParam("conv_id") conversationId:Int, form: MessageForm): ModelAndView {
+    open fun show(@RequestParam("conv_id") conversationId:Int, form: MessageForm): ModelAndView {
         form.botID = 2
         form.conversationId = conversationId
         form.messages = chatClient.searchMessages(form.botID, form.conversationId)
