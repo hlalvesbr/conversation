@@ -19,7 +19,7 @@ open class ChatClientImpl(@Value("\${chat.url}") val chatURL: String,
         httpHeaders.add("Authorization", "Token token=${assistantToken}")
         val httpEntity = HttpEntity<Any>(httpHeaders)
         
-        val conversations = restTemplate.exchange(chatURL + "/api/v1/bots/${botID}/chats/simple_list.json?organization_token=${organizationToken}&start_date=${startDate}&end_date=${endDate}&recent_than=",
+        val conversations = restTemplate.exchange("$chatURL/api/v1/bots/${botID}/chats/simple_list.json?organization_token=${organizationToken}&start_date=${startDate}&end_date=${endDate}&recent_than=",
                 HttpMethod.GET, httpEntity, Array<Conversation>::class.java).body
 
         return if (conversations != null) conversations.asList() else listOf()

@@ -24,7 +24,11 @@ open class ConversationController(@Autowired val chatClient: ChatClient) {
 
     @RequestMapping("/", method = [RequestMethod.POST])
     open fun search(form: ConversationForm): ModelAndView {
-        form.conversations = chatClient.searchConversations(form.botID, form.startDate, form.endDate)
+        try {
+            form.conversations = chatClient.searchConversations(form.botID, form.startDate, form.endDate)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
 
         val modelAndView = ModelAndView("conversations")
         modelAndView.addObject("form", form)

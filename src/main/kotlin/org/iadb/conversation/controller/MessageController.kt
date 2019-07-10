@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam
 
 @Controller
 open class MessageController(@Autowired val chatClient: ChatClient) {
-    
+
 	@RequestMapping("/messages", method = [RequestMethod.GET])
     open fun show(@RequestParam("conv_id") conversationId:Int, form: MessageForm): ModelAndView {
         form.botID = 2
@@ -24,7 +24,11 @@ open class MessageController(@Autowired val chatClient: ChatClient) {
 	
 	@RequestMapping("/messages", method = [RequestMethod.POST])
     fun search(form: MessageForm): ModelAndView {
-        form.messages = chatClient.searchMessages(form.botID, form.conversationId)
+        try {
+            form.messages = chatClient.searchMessages(form.botID, form.conversationId)
+        } catch (ex: Exception) {
+            ex.printStackTrace()
+        }
 
         val modelAndView = ModelAndView("messages")
         modelAndView.addObject("form", form)
